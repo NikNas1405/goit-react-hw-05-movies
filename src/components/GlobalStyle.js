@@ -9,6 +9,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #131415;
 }
 
 code {
@@ -16,11 +17,25 @@ code {
     monospace;
 }
 
-/*   ul {
+  ul {
     margin: 0;
     padding: 0;
     list-style: none;
-  } */
+
+
+  }
+
+.movie-item {
+  margin-bottom: 8px;
+  display: block;
+  color: #9a9b9b;
+  text-decoration:none; 
+  }
+
+  .movie-item:is(:hover , :focus) {
+    color: white;
+  }
+  
 
 h1 {
  
