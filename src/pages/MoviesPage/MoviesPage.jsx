@@ -1,15 +1,42 @@
-const MoviesPage = () => {
-  return (
-    <main>
-      <h1>MoviesPage</h1>
-      <img src="https://via.placeholder.com/960x240" alt="" />
-      <p>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iusto,
-        laboriosam placeat incidunt rem illum animi nemo quibusdam quia
-        voluptatum voluptate.
-      </p>
-    </main>
-  );
-};
+// import { useSearchParams, Link, useLocation } from 'react-router-dom';
 
-export default MoviesPage;
+// import { getFilmsByQuery } from '../../utils/get-api';
+
+// const MoviesPage = () => {
+//   const location = useLocation();
+
+//   const films = getFilmsByQuery();
+
+
+
+//   const [searchParams, setSearchParams] = useSearchParams();
+//   const filmTitle = searchParams.get('name') ?? '';
+
+//   const visibleFilms = films.filter(film =>
+//     film.title.toLowerCase().includes(filmTitle.toLowerCase())
+//   );
+
+//   const updateQueryString = title => {
+//     const nextParams = title !== '' ? { title } : {};
+//     setSearchParams(nextParams);
+//   };
+
+//   return (
+//     <main>
+//       <input type="text" value={filmTitle} onChange={updateQueryString} />
+
+//       <ul>
+//         {visibleFilms.map(film => (
+//           <li key={film.id}>
+//             <Link to={`${film.id}`} state={{ from: location }}>
+//               <img src="https://via.placeholder.com/200x100" alt="" />
+//               <h2>{film.title}</h2>
+//             </Link>
+//           </li>
+//         ))}
+//       </ul>
+//     </main>
+//   );
+// };
+
+// export default MoviesPage;

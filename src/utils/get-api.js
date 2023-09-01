@@ -10,16 +10,71 @@ const defaultParams = {
 };
 
 // список найпопулярніших фільмів на сьогодні для створення колекції на головній сторінці.
-export async function getTrendingFilms() {
+export async function getTrendingFilms(page) {
   const options = new URLSearchParams({
     ...defaultParams,
+    page: page,
   });
   try {
     const response = await axios.get(
       `${BASE_URL}/trending/movie/day?${options}`
     );
+    // console.log(response.data.results);
+    // console.log(response.data.total_pages);
     return response.data;
   } catch (error) {
+    console.log(error);
+    toast.error(
+      'Sorry. Something went wrong. Please reload the page to try again.'
+    );
+  }
+}
+
+// запит повної інформації про фільм для сторінки кінофільму.
+export async function getFilmByID(filmsID) {
+  const options = new URLSearchParams({
+    ...defaultParams,
+  });
+  try {
+    const response = await axios.get(`${BASE_URL}/movie/${filmsID}?${options}`);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    toast.error(
+      'Sorry. Something went wrong. Please reload the page to try again.'
+    );
+  }
+}
+
+// запит інформації про акторський склад для сторінки кінофільму.
+export async function getFilmCastByID(filmsID) {
+  const options = new URLSearchParams({
+    ...defaultParams,
+  });
+  try {
+    const response = await axios.get(
+      `${BASE_URL}/movie/${filmsID}/credits?${options}`
+    );
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    toast.error(
+      'Sorry. Something went wrong. Please reload the page to try again.'
+    );
+  }
+}
+// запит оглядів для сторінки кінофільму.
+export async function getFilmReviewsByID(filmsID) {
+  const options = new URLSearchParams({
+    ...defaultParams,
+  });
+  try {
+    const response = await axios.get(
+      `${BASE_URL}/movie/${filmsID}/reviews?${options}`
+    );
+    return response.data;
+  } catch (error) {
+    console.log(error);
     toast.error(
       'Sorry. Something went wrong. Please reload the page to try again.'
     );
@@ -42,9 +97,3 @@ export async function getFilmsByQuery(query, page) {
     );
   }
 }
-
-// запит повної інформації про фільм для сторінки кінофільму.
-
-// запит інформації про акторський склад для сторінки кінофільму.
-
-// запит оглядів для сторінки кінофільму.

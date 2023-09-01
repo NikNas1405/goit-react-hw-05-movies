@@ -35,6 +35,18 @@ code {
   .movie-item:is(:hover , :focus) {
     color: white;
   }
+
+  .go-back {
+  margin-bottom: 8px;
+  display: block;
+  color: #CF4D73;
+  text-decoration:none; 
+  font-weight: 12px;
+  }
+
+  .go-back:is(:hover , :focus) {
+    color: #1134a6;
+  }
   
 
 h1 {
