@@ -2,15 +2,14 @@ import { lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { GlobalStyle } from './GlobalStyle';
 import { SharedLayout } from './SharedLayout/SharedLayout';
-import { ToastContainer } from 'react-toastify';
 
 const HomePage = lazy(() => import('../pages/HomePage/HomePage'));
 const MoviesPage = lazy(() => import('../pages/MoviesPage/MoviesPage'));
-// const MovieDetailsPage = lazy(() =>
-//   import('../pages/MovieDetailsPage/MovieDetailsPage')
-// );
-// const Cast = lazy(() => import('./Cast/Cast'));
-// const Reviews = lazy(() => import('./Reviews/Reviews'));
+const MovieDetailsPage = lazy(() =>
+  import('../pages/MovieDetailsPage/MovieDetailsPage')
+);
+const Cast = lazy(() => import('./Cast/Cast'));
+const Reviews = lazy(() => import('./Reviews/Reviews'));
 
 export default function App() {
   return (
@@ -19,14 +18,13 @@ export default function App() {
         <Route path="/" element={<SharedLayout />}>
           <Route index element={<HomePage />} />
           <Route path="movie" element={<MoviesPage />} />
-          {/* <Route path="movie/:id" element={<MovieDetailsPage />}>
+          <Route path="movie/:id" element={<MovieDetailsPage />}>
             <Route path="cast" element={<Cast />} />
             <Route path="reviews" element={<Reviews />} />
-          </Route> */}
+          </Route>
           <Route path="*" element={<HomePage />} />
         </Route>
       </Routes>
-      <ToastContainer />
       <GlobalStyle />
     </>
   );

@@ -32,11 +32,13 @@ code {
   }
 
   h1 {
-  font-weight: 700;
-  font-size: 36px;
+  text-align: center;
+  /* font-size: 3rem; */
+   font-size: 50px;
   color: white;
-  margin: 24px 4px;
-  text-shadow: 0px 0px 29px 4px rgba(214, 13, 13, 0.41);
+  text-shadow: 0px 0px 13px #fa1427;
+  margin: 20px;
+  
 }
 
   .go-back {
@@ -51,8 +53,6 @@ code {
     color: #1134a6;
   }
 `;
-
-
 
 export const PaginationStyled = styled.div`
   margin: 40px auto;
@@ -101,4 +101,9 @@ export const PaginationStyled = styled.div`
   .pagination > li:last-child > span {
     border-radius: unset;
   }
+`;
+
+export const Error = styled.div`
+  color: white;
+  margin: 20px;
 `;

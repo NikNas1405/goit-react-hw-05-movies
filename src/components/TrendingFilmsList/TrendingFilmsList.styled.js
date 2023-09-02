@@ -30,3 +30,7 @@ export const Title = styled.p`
   color: inherit;
   text-align: center;
 `;
+
+export const ImageHolder = styled.div`
+  height: 300px;
+`;

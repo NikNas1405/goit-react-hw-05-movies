@@ -6,3 +6,4 @@ export const TrendsMoviesListStyled = styled.ul`
   flex-wrap: wrap;
   width: 100%;
 `;
+

@@ -1,18 +1,18 @@
 import ReactPaginate from 'react-paginate';
 
 import { useState, useEffect } from 'react';
-import { toast } from 'react-toastify';
 
 import { getTrendingFilms } from '../../utils/get-api';
 import { TrendsMoviesList } from 'components/TrendingFilmsList/TrendingFilmsList';
-import { TrendsMoviesListStyled } from './HomePage.styled';
-import { PaginationStyled } from '../../components/GlobalStyle';
+import { TrendsMoviesListStyled  } from './HomePage.styled';
+import { PaginationStyled, Error } from '../../components/GlobalStyle';
 // import { Button } from '../../components/Button/Button.styled';
 
 const HomePage = () => {
   const [trendsFilms, setTrendsMovies] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     const getTrends = async () => {
@@ -27,9 +27,8 @@ const HomePage = () => {
           setTrendsMovies([...films.results]);
         }
       } catch (error) {
-        return toast.error(
-          'Something went wrong. Please refresh page or try again after some time.'
-        );
+        console.log(error);
+        setError(true);
       }
     };
     getTrends();
@@ -46,29 +45,39 @@ const HomePage = () => {
   return (
     <main>
       <h1>Trending today</h1>
-      <TrendsMoviesListStyled>
-        <TrendsMoviesList trendsMovies={trendsFilms} />
-      </TrendsMoviesListStyled>
+      {error && (
+        <Error>
+          Sorry. Something went wrong. Please reload the page to try again.
+        </Error>
+      )}
+
+      {!error && (
+        <TrendsMoviesListStyled>
+          <TrendsMoviesList trendsMovies={trendsFilms} />
+        </TrendsMoviesListStyled>
+      )}
 
       {/* {trendsFilms.length !== 0 && page <= totalPages && (
         <Button onClick={handleLoadMore}>Get more</Button>
       )} */}
 
-      <PaginationStyled>
-        <ReactPaginate
-          pageCount={totalPages}
-          previousLabel={'Back'}
-          nextLabel={'Next'}
-          breakLabel={'...'}
-          marginPagesDisplayed={1}
-          pageRangeDisplayed={4}
-          onPageChange={handlePageClick}
-          containerClassName={'pagination'}
-          activeClassName={'active'}
-          subContainerClassName={'pages pagination'}
-          breakClassName={'break-me'}
-        />
-      </PaginationStyled>
+      {trendsFilms.length !== 0 && page <= totalPages && !error && (
+        <PaginationStyled>
+          <ReactPaginate
+            pageCount={totalPages}
+            previousLabel={'Back'}
+            nextLabel={'Next'}
+            breakLabel={'...'}
+            marginPagesDisplayed={1}
+            pageRangeDisplayed={4}
+            onPageChange={handlePageClick}
+            containerClassName={'pagination'}
+            activeClassName={'active'}
+            subContainerClassName={'pages pagination'}
+            breakClassName={'break-me'}
+          />
+        </PaginationStyled>
+      )}
     </main>
   );
 };

@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { toast } from 'react-toastify';
 
 const BASE_URL = 'https://api.themoviedb.org/3';
 const API_KEY = '69dd57d815b4b29a8f016ba838d3c4d6';
@@ -24,9 +23,7 @@ export async function getTrendingFilms(page) {
     return response.data;
   } catch (error) {
     console.log(error);
-    toast.error(
-      'Sorry. Something went wrong. Please reload the page to try again.'
-    );
+    
   }
 }
 
@@ -40,9 +37,7 @@ export async function getFilmByID(filmsID) {
     return response.data;
   } catch (error) {
     console.log(error);
-    toast.error(
-      'Sorry. Something went wrong. Please reload the page to try again.'
-    );
+    
   }
 }
 
@@ -58,9 +53,7 @@ export async function getFilmCastByID(filmsID) {
     return response.data;
   } catch (error) {
     console.log(error);
-    toast.error(
-      'Sorry. Something went wrong. Please reload the page to try again.'
-    );
+    
   }
 }
 // запит оглядів для сторінки кінофільму.
@@ -75,9 +68,7 @@ export async function getFilmReviewsByID(filmsID) {
     return response.data;
   } catch (error) {
     console.log(error);
-    toast.error(
-      'Sorry. Something went wrong. Please reload the page to try again.'
-    );
+    
   }
 }
 
@@ -92,8 +83,8 @@ export async function getFilmsByQuery(query, page) {
     const response = await axios.get(`${BASE_URL}/search/movie?${options}`);
     return response.data;
   } catch (error) {
-    toast.error(
-      'Sorry. No matches found. Please, try again with another search query.'
-    );
+    // toast(
+    //   'Sorry. No matches found. Please, try again with another search query.'
+    // );
   }
 }

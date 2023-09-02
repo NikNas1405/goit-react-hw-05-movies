@@ -5,6 +5,8 @@ import { AiOutlineArrowLeft } from 'react-icons/ai';
 
 import { getFilmByID } from '../../utils/get-api';
 
+import Loader from '../../components/Loader/Loader';
+
 const MovieDetailsPage = () => {
   const { id } = useParams();
 
@@ -41,13 +43,13 @@ const MovieDetailsPage = () => {
       {/* <h2>Product - {film.results.title}</h2> */}
       <ul>
         <li>
-          <Link to="cast">Read about our mission</Link>
+          <Link to="cast">Cast</Link>
         </li>
         <li>
-          <Link to="reviews">Go through the reviews</Link>
+          <Link to="reviews">Reviews</Link>
         </li>
       </ul>
-      <Suspense fallback={<div>Loading subpage...</div>}>
+      <Suspense fallback={<Loader />}>
         <Outlet />
       </Suspense>
     </main>
