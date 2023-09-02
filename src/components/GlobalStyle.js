@@ -1,4 +1,5 @@
-import { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
+
 import 'modern-normalize';
 
 export const GlobalStyle = createGlobalStyle`
@@ -10,6 +11,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #131415;
+  /* background: linear-gradient(to left, #131415, #5691c8); */
 }
 
 code {
@@ -21,20 +23,21 @@ code {
     margin: 0;
     padding: 0;
     list-style: none;
-
-
+  
   }
 
-.movie-item {
-  margin-bottom: 8px;
-  display: block;
-  color: #9a9b9b;
-  text-decoration:none; 
+  img {
+    display: block;
+    width: 100%
   }
 
-  .movie-item:is(:hover , :focus) {
-    color: white;
-  }
+  h1 {
+  font-weight: 700;
+  font-size: 36px;
+  color: white;
+  margin: 24px 4px;
+  text-shadow: 0px 0px 29px 4px rgba(214, 13, 13, 0.41);
+}
 
   .go-back {
   margin-bottom: 8px;
@@ -47,17 +50,55 @@ code {
   .go-back:is(:hover , :focus) {
     color: #1134a6;
   }
-  
+`;
 
-h1 {
- 
-  font-weight: 700;
-  font-size: 36px;
-  color: white;
-  margin: 12px 4px;
-}
 
-p {
-  color: #9f9f9f;
-}
+
+export const PaginationStyled = styled.div`
+  margin: 40px auto;
+
+  .pagination {
+    margin: 15px auto;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+    outline: none;
+  }
+
+  .pagination > li > a {
+    border: 1px solid #fff;
+    padding: 5px 10px;
+    outline: none;
+    cursor: pointer;
+    transition: all 250ms ease-out;
+  }
+  .pagination > .active > a,
+  .pagination > .active > span,
+  .pagination > .active > a:hover,
+  .pagination > .active > span:hover,
+  .pagination > .active > a:focus,
+  .pagination > .active > span:focus {
+    background-color: #fff;
+    border-color: #fff;
+    outline: none;
+    color: #eb3324;
+    padding: 8px 12px;
+
+    box-shadow: 0px 0px 29px 4px rgba(214, 13, 13, 0.41);
+    transform: scale(1.1);
+  }
+
+  .pagination > li > a,
+  .pagination > li > span {
+    color: #c8c8c8;
+  }
+
+  .pagination > li:first-child > a,
+  .pagination > li:first-child > span,
+  .pagination > li:last-child > a,
+  .pagination > li:last-child > span {
+    border-radius: unset;
+  }
 `;

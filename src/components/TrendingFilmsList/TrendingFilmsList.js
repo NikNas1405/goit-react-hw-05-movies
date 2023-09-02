@@ -1,15 +1,28 @@
-import { Link } from 'react-router-dom';
-// import { Container, CardWrapper, ProductName } from './ProductList.styled';
+import {
+  TrendsMovieItemStyled,
+  LinkStyled,
+  Title,
+} from './TrendingFilmsList.styled';
 
 export const TrendsMoviesList = ({ trendsMovies }) => {
   return (
     <>
       {trendsMovies.map(movie => (
-        <li key={movie.id}>
-          <Link to={`/movie/${movie.id}`} id={movie.id} className="movie-item">
-            {movie.title || movie.original_title}
-          </Link>
-        </li>
+        <TrendsMovieItemStyled key={movie.id}>
+          <LinkStyled
+            to={`/movie/${movie.id}`}
+            id={movie.id}
+            className="movie-item"
+          >
+            <img
+              src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+              alt={movie.title}
+              width="100px"
+              height="auto"
+            />
+            <Title>{movie.title || movie.original_title}</Title>
+          </LinkStyled>
+        </TrendsMovieItemStyled>
       ))}
     </>
   );
