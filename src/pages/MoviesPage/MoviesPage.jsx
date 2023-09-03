@@ -59,8 +59,16 @@ const MoviesPage = () => {
 
     const value = event.target.elements.searchQuery.value;
 
+    // console.log(value);
+    // console.log(currentSearch);
+
+    if (value !== currentSearch) {
+      setPage(1);
+      setTotalPages(0);
+    }
+
     value.trim() !== '' ? (
-      setQuery({ query: value }) && setPage(1) && setTotalPages(0)
+      setQuery({ query: value })
     ) : (
       <Error>Please enter film`s title for search</Error>
     );
