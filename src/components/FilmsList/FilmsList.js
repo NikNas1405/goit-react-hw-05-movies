@@ -1,18 +1,18 @@
 import {
-  TrendsMovieItemStyled,
+  FilmsItemStyled,
   LinkStyled,
   Title,
   ImageHolder,
-} from './TrendingFilmsList.styled';
+} from './FilmsList.styled';
 
 import { useLocation } from 'react-router-dom';
 
-export const TrendsMoviesList = ({ trendsMovies }) => {
+export const FilmsList = ({ movies }) => {
   const location = useLocation();
   return (
     <>
-      {trendsMovies.map(movie => (
-        <TrendsMovieItemStyled key={movie.id}>
+      {movies.map(movie => (
+        <FilmsItemStyled key={movie.id}>
           <LinkStyled
             to={`/movie/${movie.id}`}
             id={movie.id}
@@ -22,15 +22,16 @@ export const TrendsMoviesList = ({ trendsMovies }) => {
             <ImageHolder>
               <img
                 src={
-                  `https://image.tmdb.org/t/p/w500/${movie.poster_path}` ||
-                  'https://d994l96tlvogv.cloudfront.net/uploads/film/poster/poster-image-coming-soon-placeholder-no-logo-500-x-740_29376.png'
+                  movie.poster_path
+                    ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
+                    : 'https://d994l96tlvogv.cloudfront.net/uploads/film/poster/poster-image-coming-soon-placeholder-no-logo-500-x-740_29376.png'
                 }
                 alt={movie.title}
               />
             </ImageHolder>
             <Title>{movie.title || movie.original_title}</Title>
           </LinkStyled>
-        </TrendsMovieItemStyled>
+        </FilmsItemStyled>
       ))}
     </>
   );

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-export const TrendsMovieItemStyled = styled.li`
+export const FilmsItemStyled = styled.li`
   margin-bottom: 8px;
   /* max-width: 100px; */
   display: block;

@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import { getTrendingFilms } from '../../utils/get-api';
-import { TrendsMoviesList } from 'components/TrendingFilmsList/TrendingFilmsList';
+import { FilmsList } from 'components/FilmsList/FilmsList';
 import { TrendsMoviesListStyled } from './HomePage.styled';
 import { PaginationStyled, Error } from '../../components/GlobalStyle';
 // import { Button } from '../../components/Button/Button.styled';
@@ -24,13 +24,7 @@ const HomePage = () => {
         const films = await getTrendingFilms(page);
         setTotalPages(Math.floor(films.total_pages / 20));
         setSearchParams({ page: page });
-
-        if (page === 1) {
-          setTrendsMovies([...films.results]);
-        } else {
-          // setTrendsMovies(prevFilms => [...prevFilms, ...films.results]);
-          setTrendsMovies([...films.results]);
-        }
+        setTrendsMovies([...films.results]);
       } catch (error) {
         console.log(error);
         setError(true);
@@ -56,7 +50,7 @@ const HomePage = () => {
         </Error>
       ) : (
         <TrendsMoviesListStyled>
-          <TrendsMoviesList trendsMovies={trendsFilms} />
+          <FilmsList movies={trendsFilms} />
         </TrendsMoviesListStyled>
       )}
 
