@@ -1,5 +1,5 @@
-import { Suspense, useState, useEffect } from 'react';
-// import { Suspense, useState, useEffect, useRef } from 'react';
+// import { Suspense, useState, useEffect } from 'react';
+import { Suspense, useState, useEffect, useRef } from 'react';
 import { Outlet, useLocation, useParams } from 'react-router-dom';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { getYear } from 'date-fns';
@@ -21,8 +21,7 @@ import {
 const MovieDetailsPage = () => {
   const { id } = useParams();
   const location = useLocation();
-  const backLinkHref = location?.state?.from ?? '/movie';
-  // const backLinkHref = useRef(location?.state?.from ?? '/movie');
+  const backLinkHref = useRef(location?.state?.from ?? '/movie');
 
   const [film, setFilm] = useState([]);
   const [noResults, setNoResults] = useState(false);
@@ -43,38 +42,26 @@ const MovieDetailsPage = () => {
     getFilmInformation(id);
   }, [id]);
 
-  //   {
-  //      "genres": [
-  //     {
-  //       "id": 18,
-  //       "name": "Drama"
-  //     },
-  //     {
-  //       "id": 36,
-  //       "name": "History"
-  //     }
-  //   ],
-  //     "id": 872585,
-  //       "title": "Oppenheimer",
-  //   "overview": "The story of J. Robert Oppenheimer’s role in the development of the atomic bomb during World War II.",
-  //    "poster_path": "/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg",
-
-  //    "vote_average": 8.269,
-  // }
-
   const { genres, title, overview, poster_path, vote_average, release_date } =
     film;
 
   const userScore = vote_average * 10;
   const year = getYear(new Date(release_date));
-  // const result = getYear(new Date(2014, 6, 2));
 
   return (
     <main>
-      <LinkStyled to={backLinkHref}>
-        <AiOutlineArrowLeft />
-        Go back
-      </LinkStyled>
+      {backLinkHref.current !== '/movie' ? (
+        <LinkStyled to={backLinkHref.current}>
+          <AiOutlineArrowLeft />
+          Go back
+        </LinkStyled>
+      ) : (
+        <LinkStyled to={'/'}>
+          <AiOutlineArrowLeft />
+          Go back
+        </LinkStyled>
+      )}
+
       {loading && <Loader />}
       {noResults ? (
         <Error>We don't have any information about this movie.</Error>

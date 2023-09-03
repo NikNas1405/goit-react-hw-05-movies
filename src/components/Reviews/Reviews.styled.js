@@ -2,9 +2,6 @@ import styled from 'styled-components';
 
 export const ReviewsList = styled.ul`
   margin-top: 20px;
-  /* gap: 16px;
-  display: flex;
-  flex-wrap: wrap; */
   width: 100%;
 `;
 

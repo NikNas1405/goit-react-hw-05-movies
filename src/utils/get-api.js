@@ -79,8 +79,6 @@ export async function getFilmsByQuery(query, page) {
     const response = await axios.get(`${BASE_URL}/search/movie?${options}`);
     return response.data;
   } catch (error) {
-    // toast(
-    //   'Sorry. No matches found. Please, try again with another search query.'
-    // );
+    console.log(error);
   }
 }

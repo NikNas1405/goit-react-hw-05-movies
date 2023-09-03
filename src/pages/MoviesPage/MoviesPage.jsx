@@ -54,9 +54,6 @@ const MoviesPage = () => {
 
     const value = event.target.elements.searchQuery.value;
 
-    // console.log(value);
-    // console.log(currentSearch);
-
     if (value !== currentSearch) {
       setPage(1);
       setTotalPages(0);

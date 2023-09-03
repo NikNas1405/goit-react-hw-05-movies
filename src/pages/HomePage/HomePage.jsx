@@ -6,14 +6,12 @@ import { FilmsList } from 'components/FilmsList/FilmsList';
 import Pagination from '../../components/Pagination/Pagination';
 import { TrendsMoviesListStyled } from './HomePage.styled';
 import { Error } from '../../components/GlobalStyle';
-// import { Button } from '../../components/Button/Button.styled';
 
 const HomePage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const [trendsFilms, setTrendsMovies] = useState([]);
   const [page, setPage] = useState(Number(searchParams.get('page')) || 1);
-  // const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [error, setError] = useState(false);
 
@@ -32,10 +30,6 @@ const HomePage = () => {
     getTrends();
   }, [page, setSearchParams]);
 
-  // const handleLoadMore = () => {
-  //   setPage(page => page + 1);
-  // };
-
   return (
     <main>
       <h1>Trending today</h1>
@@ -48,11 +42,6 @@ const HomePage = () => {
           <FilmsList movies={trendsFilms} />
         </TrendsMoviesListStyled>
       )}
-
-      {/* {trendsFilms.length !== 0 && page <= totalPages && (
-        <Button onClick={handleLoadMore}>Get more</Button>
-      )} */}
-
       {trendsFilms.length !== 0 && page <= totalPages && !error && (
         <Pagination totalPages={totalPages} page={page} setPage={setPage} />
       )}

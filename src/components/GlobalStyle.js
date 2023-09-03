@@ -11,7 +11,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #131415;
-  /* background: linear-gradient(to left, #131415, #5691c8); */
 }
 
 code {
@@ -34,7 +33,6 @@ code {
 
   h1 {
   text-align: center;
-  /* font-size: 3rem; */
    font-size: 50px;
   color: white;
   text-shadow: 0px 0px 13px #fa1427;
