@@ -4,8 +4,9 @@ import { NavLink } from 'react-router-dom';
 export const Container = styled.div`
   max-width: 1140px;
   margin: 0 auto;
-  padding: 0 16px;
+  padding: 20px;
   background-color: #131415;
+  box-shadow: 0px 0px 100px #1134a6;
 `;
 
 export const Header = styled.header`
@@ -17,6 +18,7 @@ export const Header = styled.header`
   margin: 0 auto 16px;
   border-bottom: 1px solid black;
   background-color: black;
+  box-shadow: 0px 0px 50px #1134a6;
 
   > nav {
     display: flex;

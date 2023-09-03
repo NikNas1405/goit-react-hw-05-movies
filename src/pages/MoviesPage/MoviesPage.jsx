@@ -1,14 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import ReactPaginate from 'react-paginate';
-
-// import { Link, useLocation } from 'react-router-dom';
-
 import { getFilmsByQuery } from '../../utils/get-api';
 import Loader from '../../components/Loader/Loader';
 import { FilmsList } from 'components/FilmsList/FilmsList';
-import { PaginationStyled } from '../../components/GlobalStyle';
-
+import Pagination from '../../components/Pagination/Pagination';
 import {
   Input,
   SearchForm,
@@ -83,10 +78,6 @@ const MoviesPage = () => {
     setTotalPages(0);
   };
 
-  const handlePageClick = event => {
-    setPage(event.selected + 1);
-  };
-
   return (
     <main>
       <SearchForm onSubmit={onSubmitSearchForm}>
@@ -113,22 +104,7 @@ const MoviesPage = () => {
         </QueryFilmsListStyled>
       )}
       {totalPages !== 0 && (
-        <PaginationStyled>
-          <ReactPaginate
-            pageCount={totalPages}
-            previousLabel={'Back'}
-            nextLabel={'Next'}
-            breakLabel={'...'}
-            marginPagesDisplayed={1}
-            pageRangeDisplayed={4}
-            onPageChange={handlePageClick}
-            containerClassName={'pagination'}
-            activeClassName={'active'}
-            subContainerClassName={'pages pagination'}
-            breakClassName={'break-me'}
-            initialPage={page - 1}
-          />
-        </PaginationStyled>
+        <Pagination totalPages={totalPages} page={page} setPage={setPage} />
       )}
     </main>
   );

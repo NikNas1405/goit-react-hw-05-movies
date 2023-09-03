@@ -1,12 +1,11 @@
-import ReactPaginate from 'react-paginate';
-
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import { getTrendingFilms } from '../../utils/get-api';
 import { FilmsList } from 'components/FilmsList/FilmsList';
+import Pagination from '../../components/Pagination/Pagination';
 import { TrendsMoviesListStyled } from './HomePage.styled';
-import { PaginationStyled, Error } from '../../components/GlobalStyle';
+import { Error } from '../../components/GlobalStyle';
 // import { Button } from '../../components/Button/Button.styled';
 
 const HomePage = () => {
@@ -37,10 +36,6 @@ const HomePage = () => {
   //   setPage(page => page + 1);
   // };
 
-  const handlePageClick = event => {
-    setPage(event.selected + 1);
-  };
-
   return (
     <main>
       <h1>Trending today</h1>
@@ -59,22 +54,7 @@ const HomePage = () => {
       )} */}
 
       {trendsFilms.length !== 0 && page <= totalPages && !error && (
-        <PaginationStyled>
-          <ReactPaginate
-            pageCount={totalPages}
-            previousLabel={'Back'}
-            nextLabel={'Next'}
-            breakLabel={'...'}
-            marginPagesDisplayed={1}
-            pageRangeDisplayed={4}
-            onPageChange={handlePageClick}
-            containerClassName={'pagination'}
-            activeClassName={'active'}
-            subContainerClassName={'pages pagination'}
-            breakClassName={'break-me'}
-            initialPage={page - 1}
-          />
-        </PaginationStyled>
+        <Pagination totalPages={totalPages} page={page} setPage={setPage} />
       )}
     </main>
   );
