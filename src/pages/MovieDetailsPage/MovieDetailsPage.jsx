@@ -1,57 +1,140 @@
-import { Suspense } from 'react';
-import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
-
+import { Suspense, useState, useEffect } from 'react';
+// import { Suspense, useState, useEffect, useRef } from 'react';
+import { Outlet, useLocation, useParams } from 'react-router-dom';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
-
+import { getYear } from 'date-fns';
 import { getFilmByID } from '../../utils/get-api';
-
+import { Error } from '../../components/GlobalStyle';
 import Loader from '../../components/Loader/Loader';
+import {
+  Movie,
+  LinkStyled,
+  SectionAddTitle,
+  ImageHolder,
+  FilmDescription,
+  Title,
+  SubTitle,
+  Text,
+  GenresItem,
+} from './MovieDetailsPage.styled';
 
 const MovieDetailsPage = () => {
   const { id } = useParams();
-
-  //  console.log(id);
-  // const film = getFilmByID(id);
   const location = useLocation();
+  const backLinkHref = location?.state?.from ?? '/movie';
+  // const backLinkHref = useRef(location?.state?.from ?? '/movie');
 
-  // console.log(film);
+  const [film, setFilm] = useState([]);
+  const [noResults, setNoResults] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const backLinkHref = location?.state?.from ?? '/';
+  useEffect(() => {
+    async function getFilmInformation(id) {
+      setLoading(true);
+      try {
+        const response = await getFilmByID(id);
+        setFilm(response);
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+        setNoResults(true);
+      }
+    }
+    getFilmInformation(id);
+  }, [id]);
+
+  //   {
+  //      "genres": [
+  //     {
+  //       "id": 18,
+  //       "name": "Drama"
+  //     },
+  //     {
+  //       "id": 36,
+  //       "name": "History"
+  //     }
+  //   ],
+  //     "id": 872585,
+  //       "title": "Oppenheimer",
+  //   "overview": "The story of J. Robert Oppenheimer’s role in the development of the atomic bomb during World War II.",
+  //    "poster_path": "/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg",
+
+  //    "vote_average": 8.269,
+  // }
+
+  const { genres, title, overview, poster_path, vote_average, release_date } =
+    film;
+
+  const userScore = vote_average * 10;
+  const year = getYear(new Date(release_date));
+  // const result = getYear(new Date(2014, 6, 2));
 
   return (
     <main>
-      <Link to={backLinkHref} className="go-back">
+      <LinkStyled to={backLinkHref}>
         <AiOutlineArrowLeft />
         Go back
-      </Link>
+      </LinkStyled>
+      {loading && <Loader />}
+      {noResults ? (
+        <Error>We don't have any information about this movie.</Error>
+      ) : (
+        <>
+          <Movie>
+            <ImageHolder>
+              <img
+                src={
+                  poster_path
+                    ? `https://image.tmdb.org/t/p/w500/${poster_path}`
+                    : 'https://d994l96tlvogv.cloudfront.net/uploads/film/poster/poster-image-coming-soon-placeholder-no-logo-500-x-740_29376.png'
+                }
+                alt={title}
+              />
+            </ImageHolder>
 
-      <h1>About Us</h1>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus
-        laborum amet ab cumque sit nihil dolore modi error repudiandae
-        perspiciatis atque voluptas corrupti, doloribus ex maiores quam magni
-        mollitia illum dolor quis alias in sequi quod. Sunt ex numquam hic
-        asperiores facere natus sapiente cum neque laudantium quam, expedita
-        voluptates atque quia aspernatur saepe illo, rem quasi praesentium
-        aliquid sed inventore obcaecati veniam? Nisi magnam vero, dolore
-        praesentium totam ducimus similique asperiores culpa, eius amet
-        repudiandae quam ut. Architecto commodi, tempore ut nostrum voluptas
-        dolorum illum voluptatum dolores! Quas perferendis quis alias excepturi
-        eaque voluptatibus eveniet error, nulla rem iusto?
-      </p>
+            <FilmDescription>
+              <Title>
+                {title} ({year})
+              </Title>
 
-      {/* <h2>Product - {film.results.title}</h2> */}
-      <ul>
-        <li>
-          <Link to="cast">Cast</Link>
-        </li>
-        <li>
-          <Link to="reviews">Reviews</Link>
-        </li>
-      </ul>
-      <Suspense fallback={<Loader />}>
-        <Outlet />
-      </Suspense>
+              {vote_average ? (
+                <Text>User Score: {userScore.toFixed(0)} %</Text>
+              ) : (
+                <Text>User Score: {vote_average}</Text>
+              )}
+              <SubTitle>Overview</SubTitle>
+              {overview ? (
+                <Text>{overview}</Text>
+              ) : (
+                <Text>Sorry, we can`t get any information about it.</Text>
+              )}
+              <SubTitle>Genres</SubTitle>
+              <ul>
+                {genres &&
+                  genres.map(({ id, name }) => (
+                    <GenresItem key={id}>{name}</GenresItem>
+                  ))}
+              </ul>
+            </FilmDescription>
+          </Movie>
+          <hr />
+          <div>
+            <SectionAddTitle>Additional information</SectionAddTitle>
+            <ul>
+              <li>
+                <LinkStyled to="cast">Cast</LinkStyled>
+              </li>
+              <li>
+                <LinkStyled to="reviews">Reviews</LinkStyled>
+              </li>
+            </ul>
+            <hr />
+            <Suspense fallback={<Loader />}>
+              <Outlet />
+            </Suspense>
+          </div>
+        </>
+      )}
     </main>
   );
 };

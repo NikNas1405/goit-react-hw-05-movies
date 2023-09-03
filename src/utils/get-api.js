@@ -23,7 +23,6 @@ export async function getTrendingFilms(page) {
     return response.data;
   } catch (error) {
     console.log(error);
-    
   }
 }
 
@@ -37,7 +36,6 @@ export async function getFilmByID(filmsID) {
     return response.data;
   } catch (error) {
     console.log(error);
-    
   }
 }
 
@@ -53,7 +51,6 @@ export async function getFilmCastByID(filmsID) {
     return response.data;
   } catch (error) {
     console.log(error);
-    
   }
 }
 // запит оглядів для сторінки кінофільму.
@@ -68,7 +65,6 @@ export async function getFilmReviewsByID(filmsID) {
     return response.data;
   } catch (error) {
     console.log(error);
-    
   }
 }
 

@@ -81,6 +81,7 @@ const MoviesPage = () => {
 //             activeClassName={'active'}
 //             subContainerClassName={'pages pagination'}
 //             breakClassName={'break-me'}
+    // initialPage={page - 1}
 //           />
 //         </PaginationStyled>
 //       )}

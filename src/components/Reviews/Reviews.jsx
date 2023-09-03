@@ -1,8 +1,14 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { getFilmReviewsByID } from '../../utils/get-api';
-// import { CastWrapper, CastList, CastListItem, Image } from './Cast.styled';
+import {
+  ReviewsList,
+  ReviewsListItem,
+  Author,
+  Text,
+} from './Reviews.styled';
 import Loader from '../../components/Loader/Loader';
+import { Error } from '../../components/GlobalStyle';
 
 export const Reviews = () => {
   const { id } = useParams();
@@ -33,16 +39,16 @@ export const Reviews = () => {
     <section>
       {loading && <Loader />}
       {noResults ? (
-        <h2>Sorry. We don't have any reviews for this movie.</h2>
+        <Error>We don't have any reviews for this movie.</Error>
       ) : (
-        <ul>
+        <ReviewsList>
           {reviews.map(({ id, author, content }) => (
-            <li key={id}>
-              <h3>Author: {author}</h3>
-              <p>{content}</p>
-            </li>
+            <ReviewsListItem key={id}>
+              <Author>Author: {author}</Author>
+              <Text>{content}</Text>
+            </ReviewsListItem>
           ))}
-        </ul>
+        </ReviewsList>
       )}
     </section>
   );

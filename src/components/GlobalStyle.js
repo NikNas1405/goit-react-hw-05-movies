@@ -28,7 +28,8 @@ code {
 
   img {
     display: block;
-    width: 100%
+    width: 100%;
+    height: 100%;
   }
 
   h1 {
@@ -40,18 +41,6 @@ code {
   margin: 20px;
   
 }
-
-  .go-back {
-  margin-bottom: 8px;
-  display: block;
-  color: #CF4D73;
-  text-decoration:none; 
-  font-weight: 12px;
-  }
-
-  .go-back:is(:hover , :focus) {
-    color: #1134a6;
-  }
 `;
 
 export const PaginationStyled = styled.div`

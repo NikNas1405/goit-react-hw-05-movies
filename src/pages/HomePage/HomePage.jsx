@@ -1,16 +1,20 @@
 import ReactPaginate from 'react-paginate';
 
 import { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 import { getTrendingFilms } from '../../utils/get-api';
 import { TrendsMoviesList } from 'components/TrendingFilmsList/TrendingFilmsList';
-import { TrendsMoviesListStyled  } from './HomePage.styled';
+import { TrendsMoviesListStyled } from './HomePage.styled';
 import { PaginationStyled, Error } from '../../components/GlobalStyle';
 // import { Button } from '../../components/Button/Button.styled';
 
 const HomePage = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+
   const [trendsFilms, setTrendsMovies] = useState([]);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(Number(searchParams.get('page')) || 1);
+  // const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [error, setError] = useState(false);
 
@@ -19,6 +23,7 @@ const HomePage = () => {
       try {
         const films = await getTrendingFilms(page);
         setTotalPages(Math.floor(films.total_pages / 20));
+        setSearchParams({ page: page });
 
         if (page === 1) {
           setTrendsMovies([...films.results]);
@@ -32,7 +37,7 @@ const HomePage = () => {
       }
     };
     getTrends();
-  }, [page]);
+  }, [page, setSearchParams]);
 
   // const handleLoadMore = () => {
   //   setPage(page => page + 1);
@@ -45,13 +50,11 @@ const HomePage = () => {
   return (
     <main>
       <h1>Trending today</h1>
-      {error && (
+      {error ? (
         <Error>
           Sorry. Something went wrong. Please reload the page to try again.
         </Error>
-      )}
-
-      {!error && (
+      ) : (
         <TrendsMoviesListStyled>
           <TrendsMoviesList trendsMovies={trendsFilms} />
         </TrendsMoviesListStyled>
@@ -75,6 +78,7 @@ const HomePage = () => {
             activeClassName={'active'}
             subContainerClassName={'pages pagination'}
             breakClassName={'break-me'}
+            initialPage={page - 1}
           />
         </PaginationStyled>
       )}

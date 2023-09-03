@@ -1,8 +1,9 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { getFilmCastByID } from '../../utils/get-api';
-// import { CastWrapper, CastList, CastListItem, Image } from './Cast.styled';
+import { CastList, CastListItem, ImageHolder, Name, Text } from './Cast.styled';
 import Loader from '../../components/Loader/Loader';
+import { Error } from '../../components/GlobalStyle';
 
 export const Cast = () => {
   const { id } = useParams();
@@ -11,55 +12,53 @@ export const Cast = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    async function fetchMovieCast(id) {
+    async function getFilmCast(id) {
       setLoading(true);
       try {
-        const response = await getFilmCastByID(id);
-        if (response.cast.length === 0) {
+        const castInfo = await getFilmCastByID(id);
+        if (castInfo.cast.length === 0) {
           setNoResults(true);
         }
 
-        setCasts(response.cast);
+        setCasts(castInfo.cast);
         setLoading(false);
       } catch (error) {
         console.log(error);
       }
     }
-    fetchMovieCast(id);
+    getFilmCast(id);
   }, [id]);
 
   return (
-    <div>
+    <>
       {loading && <Loader />}
       {noResults ? (
-        <h2>Sorry. We don't have cast information.</h2>
+        <Error>We don't have any information about casts.</Error>
       ) : (
-        <ul>
+        <CastList>
           {casts.map(({ id, name, profile_path, character }) => (
-            <li key={id}>
-              <div>
+            <CastListItem key={id}>
+              <ImageHolder>
                 <img
                   src={
                     profile_path
                       ? `https://image.tmdb.org/t/p/w500/${profile_path}`
-                      : 'http://s3.amazonaws.com/37assets/svn/765-default-avatar.png'
+                      : 'https://abrakadabra.fun/uploads/posts/2021-12/1640528672_14-abrakadabra-fun-p-serii-chelovek-na-avu-16.png'
                   }
                   alt={name}
-                  width="120px"
-                  height="160px"
                 />
-              </div>
+              </ImageHolder>
 
-              <p>{name}</p>
-              <p>
+              <Name>{name}</Name>
+              <Text>
                 Character:
                 <span> {character}</span>
-              </p>
-            </li>
+              </Text>
+            </CastListItem>
           ))}
-        </ul>
+        </CastList>
       )}
-    </div>
+    </>
   );
 };
 
