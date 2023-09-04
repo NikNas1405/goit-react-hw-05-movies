@@ -4,7 +4,6 @@ import { useSearchParams } from 'react-router-dom';
 import { getTrendingFilms } from '../../utils/get-api';
 import { FilmsList } from 'components/FilmsList/FilmsList';
 import Pagination from '../../components/Pagination/Pagination';
-import { TrendsMoviesListStyled } from './HomePage.styled';
 import { Error } from '../../components/GlobalStyle';
 
 const HomePage = () => {
@@ -38,9 +37,7 @@ const HomePage = () => {
           Sorry. Something went wrong. Please reload the page to try again.
         </Error>
       ) : (
-        <TrendsMoviesListStyled>
-          <FilmsList movies={trendsFilms} />
-        </TrendsMoviesListStyled>
+        <FilmsList movies={trendsFilms} />
       )}
       {trendsFilms.length !== 0 && page <= totalPages && !error && (
         <Pagination totalPages={totalPages} page={page} setPage={setPage} />

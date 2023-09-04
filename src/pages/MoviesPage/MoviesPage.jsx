@@ -4,12 +4,7 @@ import { getFilmsByQuery } from '../../utils/get-api';
 import Loader from '../../components/Loader/Loader';
 import { FilmsList } from 'components/FilmsList/FilmsList';
 import Pagination from '../../components/Pagination/Pagination';
-import {
-  Input,
-  SearchForm,
-  Button,
-  QueryFilmsListStyled,
-} from './MoviesPage.styled';
+import { Input, SearchForm, Button } from './MoviesPage.styled';
 
 import { Error } from '../../components/GlobalStyle';
 
@@ -96,9 +91,7 @@ const MoviesPage = () => {
           Sorry. Something went wrong. Please reload the page to try again.
         </Error>
       ) : (
-        <QueryFilmsListStyled>
-          <FilmsList movies={queryFilms} />
-        </QueryFilmsListStyled>
+        <FilmsList movies={queryFilms} />
       )}
       {totalPages !== 0 && (
         <Pagination totalPages={totalPages} page={page} setPage={setPage} />

@@ -51,11 +51,3 @@ export const Button = styled.button`
     background-color: #1134a6;
   }
 `;
-
-
-export const QueryFilmsListStyled = styled.ul`
-  gap: 28px;
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-`;
