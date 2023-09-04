@@ -2,9 +2,10 @@ import styled from 'styled-components';
 
 export const SearchForm = styled.form`
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 8px;
   margin: 20px auto;
-  align-items: center;
   max-width: 600px;
   border-radius: 3px;
   overflow: hidden;
@@ -19,8 +20,12 @@ export const Input = styled.input`
   background-color: white;
   padding: 0 10px;
   min-width: 350px;
-
   transition: all 0.2s ease;
+
+  @media (max-width: 400px) {
+    min-width: 250px;
+  }
+
   &:focus-within {
     box-shadow: 0 3px 5px -2px rgba(0, 0, 0, 0.3);
   }
@@ -29,7 +34,7 @@ export const Input = styled.input`
 export const Button = styled.button`
   padding: 8px 16px;
   border-radius: 2px;
-  
+
   background-color: #eb3324;
   transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
   text-align: center;
