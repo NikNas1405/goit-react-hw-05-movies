@@ -4,7 +4,7 @@ import { useSearchParams } from 'react-router-dom';
 import { getTrendingFilms } from '../../utils/get-api';
 import { FilmsList } from 'components/FilmsList/FilmsList';
 import Pagination from '../../components/Pagination/Pagination';
-import { Error } from '../../components/GlobalStyle';
+import { Error, AnimatedGradientText } from '../../components/GlobalStyle';
 
 const HomePage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -31,7 +31,7 @@ const HomePage = () => {
 
   return (
     <main>
-      <h1>Trending today</h1>
+      <AnimatedGradientText>Trending today</AnimatedGradientText>
       {error ? (
         <Error>
           Sorry. Something went wrong. Please reload the page to try again.
