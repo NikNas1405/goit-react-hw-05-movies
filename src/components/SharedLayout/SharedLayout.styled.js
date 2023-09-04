@@ -11,6 +11,7 @@ export const Container = styled.div`
 
 export const Header = styled.header`
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   padding: 8px;
@@ -20,8 +21,14 @@ export const Header = styled.header`
   background-color: black;
   box-shadow: 0px 0px 50px #1134a6;
 
+  @media (max-width: 368px) {
+    justify-content: center;
+  }
+
   > nav {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     max-width: 960px;
     padding: 0;
     align-items: end;

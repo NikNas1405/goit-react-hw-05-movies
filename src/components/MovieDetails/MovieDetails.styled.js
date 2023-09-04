@@ -4,6 +4,11 @@ import { Link } from 'react-router-dom';
 export const Movie = styled.div`
   display: flex;
   gap: 20px;
+  justify-content: center;
+
+  @media (max-width: 400px) {
+    flex-wrap: wrap;
+  }
 `;
 
 export const ImageHolder = styled.div`
@@ -24,6 +29,10 @@ export const Title = styled.h2`
   text-shadow: 0px 0px 10px #fa1427;
   margin: 0 0 30px;
   padding: 0;
+
+  @media (max-width: 768px) {
+    font-size: 24px;
+  }
 `;
 
 export const SectionAddTitle = styled.h3`
@@ -57,6 +66,11 @@ export const LinkStyled = styled(Link)`
   :is(:hover, :focus) {
     color: #1134a6;
   }
+`;
+
+export const GenresList = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
 `;
 
 export const GenresItem = styled.li`

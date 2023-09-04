@@ -11,6 +11,7 @@ import {
   Title,
   SubTitle,
   Text,
+  GenresList,
   GenresItem,
 } from './MovieDetails.styled';
 
@@ -52,12 +53,12 @@ const MovieDetails = ({ film }) => {
             <Text>Sorry, we can`t get any information about it.</Text>
           )}
           <SubTitle>Genres</SubTitle>
-          <ul>
+          <GenresList>
             {genres &&
               genres.map(({ id, name }) => (
                 <GenresItem key={id}>{name}</GenresItem>
               ))}
-          </ul>
+          </GenresList>
         </FilmDescription>
       </Movie>
       <hr />
