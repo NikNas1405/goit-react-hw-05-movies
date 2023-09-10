@@ -9,19 +9,18 @@ import { Input, SearchForm, Button } from './MoviesPage.styled';
 import { Error } from '../../components/GlobalStyle';
 
 const MoviesPage = () => {
-  const [queryFilms, setQueryFilms] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
-  const [query, setQuery] = useSearchParams();
-
-  const currentSearch = query.get('query') ?? '';
-
-  const [page, setPage] = useState(Number(searchParams.get('page')) || 1);
   const [error, setError] = useState(false);
   const [totalPages, setTotalPages] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [queryFilms, setQueryFilms] = useState([]);
+  const [page, setPage] = useState(Number(searchParams.get('page')) || 1);
 
   useEffect(() => {
-    if (currentSearch === '') return;
+    const currentSearch = searchParams.get('query') ?? '';
+    if (!currentSearch) {
+      return;
+    }
     const getAskedFilms = async () => {
       setLoading(true);
       try {
@@ -41,31 +40,25 @@ const MoviesPage = () => {
       }
     };
     getAskedFilms();
-  }, [page, currentSearch, setSearchParams]);
+  }, [page, searchParams, setSearchParams]);
 
   const onSubmitSearchForm = event => {
     event.preventDefault();
-
     const value = event.target.elements.searchQuery.value;
-
-    if (value !== currentSearch) {
-      setPage(1);
-      setTotalPages(0);
-    }
-
     value.trim() !== '' ? (
-      setQuery({ query: value })
+      setSearchParams({ query: value })
     ) : (
       <Error>Please enter film`s title for search</Error>
     );
-
+    setPage(1);
+    setTotalPages(0);
     event.currentTarget.reset();
   };
 
-  const onButtonSearchFormResetClick = event => {
+  const onButtonSearchFormResetClick = () => {
     setQueryFilms([]);
     setPage(1);
-    setQuery('');
+    setSearchParams({ query: '' });
     setTotalPages(0);
   };
 

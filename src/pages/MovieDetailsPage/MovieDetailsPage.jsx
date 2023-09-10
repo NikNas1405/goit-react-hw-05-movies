@@ -10,13 +10,12 @@ import MovieDetails from '../../components/MovieDetails/MovieDetails';
 import { LinkStyled } from './MovieDetailsPage.styled';
 
 const MovieDetailsPage = () => {
-  const { id } = useParams();
-  const location = useLocation();
-  const backLinkHref = useRef(location?.state?.from ?? '/movie');
-
   const [film, setFilm] = useState([]);
   const [noResults, setNoResults] = useState(false);
   const [loading, setLoading] = useState(false);
+  const { id } = useParams();
+  const location = useLocation();
+  const backLinkHref = useRef(location?.state?.from ?? '/movie');
 
   useEffect(() => {
     setLoading(true);
@@ -39,7 +38,7 @@ const MovieDetailsPage = () => {
 
   return (
     <main>
-      {backLinkHref.current !== '/movie' ? (
+      {backLinkHref.current ? (
         <LinkStyled to={backLinkHref.current}>
           <AiOutlineArrowLeft />
           Go back

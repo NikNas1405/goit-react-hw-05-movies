@@ -19,11 +19,11 @@ export const Cast = () => {
         if (castInfo.cast.length === 0) {
           setNoResults(true);
         }
-
         setCasts(castInfo.cast);
-        setLoading(false);
       } catch (error) {
         console.log(error);
+      } finally {
+        setLoading(false);
       }
     }
     getFilmCast(id);

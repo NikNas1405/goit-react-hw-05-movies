@@ -1,12 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { getFilmReviewsByID } from '../../utils/get-api';
-import {
-  ReviewsList,
-  ReviewsListItem,
-  Author,
-  Text,
-} from './Reviews.styled';
+import { ReviewsList, ReviewsListItem, Author, Text } from './Reviews.styled';
 import Loader from '../../components/Loader/Loader';
 import { Error } from '../../components/GlobalStyle';
 
@@ -27,9 +22,10 @@ export const Reviews = () => {
         }
 
         setReviews(response.results);
-        setLoading(false);
       } catch (error) {
         console.log(error);
+      } finally {
+        setLoading(false);
       }
     }
     fetchMovieReviews(id);
