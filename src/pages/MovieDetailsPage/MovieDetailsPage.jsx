@@ -24,10 +24,11 @@ const MovieDetailsPage = () => {
       try {
         const response = await getFilmByID(id);
         setFilm(response);
-        setLoading(false);
       } catch (error) {
         console.log(error);
         setNoResults(true);
+      } finally {
+        setLoading(false);
       }
     }
     getFilmInformation(id);

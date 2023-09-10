@@ -27,7 +27,6 @@ const MoviesPage = () => {
       try {
         const askedFilms = await getFilmsByQuery(currentSearch, page);
         if (askedFilms.results.length === 0) {
-          setLoading(false);
           return;
         }
 
