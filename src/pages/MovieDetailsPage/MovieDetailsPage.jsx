@@ -19,11 +19,11 @@ const MovieDetailsPage = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
+    if (!id) {
+      return;
+    }
     async function getFilmInformation(id) {
-      setLoading(true);
-      if (!id) {
-        return;
-      }
       try {
         const response = await getFilmByID(id);
         setFilm(response);
