@@ -21,6 +21,9 @@ const MovieDetailsPage = () => {
   useEffect(() => {
     async function getFilmInformation(id) {
       setLoading(true);
+      if (!id) {
+        return;
+      }
       try {
         const response = await getFilmByID(id);
         setFilm(response);
