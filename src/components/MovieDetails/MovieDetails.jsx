@@ -30,7 +30,7 @@ const MovieDetails = ({ film }) => {
             src={
               poster_path
                 ? `https://image.tmdb.org/t/p/w500/${poster_path}`
-                : 'https://d994l96tlvogv.cloudfront.net/uploads/film/poster/poster-image-coming-soon-placeholder-no-logo-500-x-740_29376.png'
+                : 'https://ireland.apollo.olxcdn.com/v1/files/0iq0gb9ppip8-UA/image;s=1000x700'
             }
             alt={title}
           />

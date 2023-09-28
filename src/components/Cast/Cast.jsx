@@ -43,7 +43,7 @@ export const Cast = () => {
                   src={
                     profile_path
                       ? `https://image.tmdb.org/t/p/w500/${profile_path}`
-                      : 'https://abrakadabra.fun/uploads/posts/2021-12/1640528672_14-abrakadabra-fun-p-serii-chelovek-na-avu-16.png'
+                      : 'https://ireland.apollo.olxcdn.com/v1/files/0iq0gb9ppip8-UA/image;s=1000x700'
                   }
                   alt={name}
                 />
